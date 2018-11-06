@@ -87,3 +87,32 @@ def test_mul_money():
 def test_div_money():
     assert Money(3, USD).div(3) == Money(1, USD)
     assert Money(12, USD).div(4) == Money(3, USD)
+
+
+def test_add_money_with_symbol():
+    assert Money(1, USD) + Money(1, USD) == Money(2, USD)
+    assert (Money(1, USD) + Money(2.5, USD)) == Money(3.5, USD)
+
+def test_add_different_currencies_with_symbol():
+    with pytest.raises(DifferentCurrencyError):
+        Money(1, USD) + Money(1, BHD)
+
+def test_sub_money_with_symbol():
+    assert Money(2, USD) - Money(1, USD) == Money(1, USD)
+    assert Money(10, USD) - Money(3.75, USD) == Money(6.25, USD)
+
+def test_sub_different_currencies_with_symbol():
+    with pytest.raises(DifferentCurrencyError):
+        Money(1, USD) - Money(1, BHD)
+
+def test_mul_money_with_symbol():
+    assert Money(2, USD) * 2 == Money(4, USD)
+    assert Money(10, USD) * 3 == Money(30, USD)
+
+def test_div_money_with_symbol():
+    assert Money(3, USD) / 3 == Money(1, USD)
+    assert Money(12, USD) / 4 == Money(3, USD)
+
+
+
+
